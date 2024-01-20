@@ -46,6 +46,7 @@ class RecurrenceObserver
                         'start_time'    => $startTime,
                         'end_time'      => $endTime,
                         'recurrence'    => $event->recurrence,
+                        'salle'    => $event->salle,
                     ]);
                 }
         }

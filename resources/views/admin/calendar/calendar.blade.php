@@ -63,6 +63,17 @@
             $('#calendar').fullCalendar({
                 // put your options and callbacks here
                 events: events,
+                eventRender: function (event, element) {
+                    // Customize the appearance based on the event state
+                    if (event.state === 0) {
+                        element.css('background-color', 'red');
+                    } else if (event.state === 1) {
+                        element.css('background-color', 'green');
+                    } else if (event.state === 2) {
+                        element.css('background-color', 'blue');
+                    }
+                },
+
 
 
             })

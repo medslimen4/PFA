@@ -27,7 +27,7 @@ class SystemCalendarController extends Controller
             foreach ($source['model']::all() as $model) {
                 $crudFieldValue = $model->getOriginal($source['date_field']);
 
-                if (!$crudFieldValue) {
+                if (!$crudFieldValue || $model->states === 0) {
                     continue;
                 }
 
@@ -37,6 +37,7 @@ class SystemCalendarController extends Controller
                     'start' => $crudFieldValue,
                     'end'   => $model->{$source['end_field']},
                     'url'   => route($source['route'], $model->id),
+                    'state' => $model->states,
                 ];
             }
         }

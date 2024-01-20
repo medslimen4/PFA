@@ -28,6 +28,7 @@ class CreateEventsTable extends Migration
             $table->timestamps();
 
             $table->softDeletes();
+
         });
     }
 }
