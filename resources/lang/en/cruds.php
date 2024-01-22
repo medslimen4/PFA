@@ -63,6 +63,8 @@ return [
             'updated_at_helper'        => '',
             'deleted_at'               => 'Deleted at',
             'deleted_at_helper'        => '',
+            'user_email'               => 'Email',
+            'user_email_helper'        => '',
         ],
     ],
     'event'          => [
@@ -71,7 +73,7 @@ return [
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => '',
-            'name'              => 'Name',
+            'name'              => 'Event Name',
             'name_helper'       => '',
             'description'              => 'Description',
             'description_helper'       => '',
@@ -92,6 +94,8 @@ return [
             'deleted_at_helper' => '',
             'event'             => 'Event',
             'event_helper'      => '',
+            'user_email'               => 'Email',
+            'user_email_helper'        => '',
         ],
     ],
 ];

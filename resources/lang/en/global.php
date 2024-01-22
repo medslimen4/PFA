@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'export_all_deleted_events'                              => 'Export All Deleted Events',
     'actions'                              => 'Actions',
     'add'                                  => 'Add',
     'allRightsReserved'                    => 'All rights reserved.',

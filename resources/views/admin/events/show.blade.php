@@ -20,11 +20,20 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.event.fields.user_email') }}
+                        </th>
+                        <td>
+                            {{ $event->user_email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.event.fields.name') }}
                         </th>
                         <td>
                             {{ $event->name }}
                         </td>
+
                     </tr>
                     <tr>
                         <th>

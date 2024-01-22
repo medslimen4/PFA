@@ -9,6 +9,15 @@
     <div class="card-body">
         <form action="{{ route("admin.events.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
+
+            <div class="form-group">
+                <label for="user_email">{{ trans('cruds.event.fields.user_email') }}*</label>
+                <input type="email" id="user_email" name="user_email" class="form-control" value="{{ auth()->user()->email }}" readonly>
+                <p class="helper-block">
+                    {{ trans('cruds.event.fields.user_email_helper') }}
+                </p>
+            </div>
+
             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                 <label for="name">{{ trans('cruds.event.fields.name') }}*</label>
                 <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($event) ? $event->name : '') }}" required>

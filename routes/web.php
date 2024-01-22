@@ -33,6 +33,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::Put('admin/events/{event}/approve', 'EventsController@approve')->name('events.approve');
     Route::Put('admin/events/{event}/refuse', 'EventsController@refuse')->name('events.refuse');
+    Route::get('admin/events/deleted', 'EventsController@deletedEvents')->name('events.deleted');
+
 
 
 

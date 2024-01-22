@@ -32,6 +32,7 @@ class Event extends Model
         'description',
         'salle',
         'states',
+        'user_email',
         'end_time',
         'event_id',
         'start_time',

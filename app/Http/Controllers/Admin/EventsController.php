@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateEventRequest;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Storage;
 
 class EventsController extends Controller
 {
@@ -94,4 +95,39 @@ class EventsController extends Controller
 
         return redirect()->route('admin.events.index')->with('state_change', 'Event refused successfully');
     }
+    public function deletedEvents()
+    {
+        $deletedEvents = Event::onlyTrashed()->get();
+
+        $csvFileName = 'deleted_events_' . now()->format('Y-m-d_H-i-s') . '.csv';
+        $csvFilePath = "deleted_events\\{$csvFileName}";
+
+        // Ensure the directory exists
+        $directoryPath = storage_path("app\\deleted_events");
+        if (!file_exists($directoryPath)) {
+            mkdir($directoryPath, 0777, true);
+        }
+
+        // Save the CSV file using the Storage facade
+        Storage::disk('local')->put($csvFilePath, '');
+
+        $handle = fopen(storage_path("app\\{$csvFilePath}"), 'w');
+
+        // Add CSV header
+        fputcsv($handle, ['ID', 'Name', 'Description', 'Start Time', 'End Time', 'User Email', 'Deleted At']);
+
+        foreach ($deletedEvents as $event) {
+            fputcsv($handle, [$event->id, $event->name, $event->description, $event->start_time, $event->end_time, $event->user_email, $event->deleted_at]);
+        }
+
+        fclose($handle);
+
+        // Create a downloadable response
+        $response = response()->download(storage_path("app\\{$csvFilePath}"))->deleteFileAfterSend(true);
+
+        return $response;
+    }
+
+
+
 }

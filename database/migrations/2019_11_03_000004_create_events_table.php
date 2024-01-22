@@ -17,6 +17,8 @@ class CreateEventsTable extends Migration
 
             $table->string('salle');
 
+            $table->string('user_email');
+
             $table->integer('states')->default(2);
 
             $table->datetime('start_time');

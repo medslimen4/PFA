@@ -9,6 +9,15 @@
         </div>
     </div>
 @endcan
+@can('event_create')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-warning" href="{{ route("admin.events.deleted") }}">
+                {{ trans('global.export_all_deleted_events') }}
+            </a>
+        </div>
+    </div>
+@endcan
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.event.title_singular') }} {{ trans('global.list') }}
@@ -20,7 +29,6 @@
                 <thead>
                     <tr>
                         <th width="10">
-
                         </th>
                         <th>
                             {{ trans('cruds.event.fields.id') }}

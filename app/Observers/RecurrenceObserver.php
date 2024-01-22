@@ -46,7 +46,10 @@ class RecurrenceObserver
                         'start_time'    => $startTime,
                         'end_time'      => $endTime,
                         'recurrence'    => $event->recurrence,
-                        'salle'    => $event->salle,
+                        'salle'         => $event->salle,
+                        'user_email'    => $event->user_email,
+
+
                     ]);
                 }
         }
@@ -77,6 +80,10 @@ class RecurrenceObserver
                     $childEvent->end_time = Carbon::parse($childEvent->end_time)->addSeconds($endTime);
                 if($event->isDirty('name') && $childEvent->name == $event->getOriginal('name'))
                     $childEvent->name = $event->name;
+                if($event->isDirty('salle') && $childEvent->salle == $event->getOriginal('salle'))
+                    $childEvent->salle = $event->salle;
+                if($event->isDirty('states') && $childEvent->states == $event->getOriginal('states'))
+                    $childEvent->states = $event->states;
                 $childEvent->saveQuietly();
             }
         }

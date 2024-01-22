@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class SystemCalendarController extends Controller
 {
@@ -22,12 +23,17 @@ class SystemCalendarController extends Controller
     public function index()
     {
         $events = [];
+        $userEmail = Auth::user()->email; // Assuming you are using Laravel's authentication
 
         foreach ($this->sources as $source) {
             foreach ($source['model']::all() as $model) {
                 $crudFieldValue = $model->getOriginal($source['date_field']);
 
-                if (!$crudFieldValue || $model->states === 0) {
+                if (!$crudFieldValue) {
+                    continue;
+                }
+
+                if ($model->states === 0 && $model->user_email !== $userEmail) {
                     continue;
                 }
 
