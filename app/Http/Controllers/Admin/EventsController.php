@@ -39,8 +39,7 @@ class EventsController extends Controller
         $validator = Validator::make($request->all(), [
             'end_time' => ['required', 'after:start_time'],
             'recurrence' => ['required', 'in:none,daily,weekly,monthly'],
-            'day_of_week' => ['required_if:recurrence,weekly'],
-            'day_of_month' => ['required_if:recurrence,monthly'],
+
         ]);
 
         // Check validation result
