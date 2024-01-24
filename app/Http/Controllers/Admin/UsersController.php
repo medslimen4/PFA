@@ -11,6 +11,7 @@ use App\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
@@ -37,9 +38,17 @@ class UsersController extends Controller
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
 
+        // Send the welcome email
+        $password = $request->input('password'); // Assuming you have a 'password' field in your form
+
+        Mail::send([], [], function ($message) use ($user, $password) {
+            $message->to($user->email)
+                ->subject('Welcome to YourApp')
+                ->setBody("Hello {$user->name},\n\nYour account has been created. Here are your login details:\n\nEmail: {$user->email}\nPassword: {$password}\n\nThank you for using our application.", 'text/plain');
+        });
+
         return redirect()->route('admin.users.index');
     }
-
     public function edit(User $user)
     {
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
